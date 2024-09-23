@@ -44,14 +44,51 @@ const styles = StyleSheet.create({
     },
 
     block: {
-       display: 'grid',
-       flexDirection: 'row',
-       flexWrap: 'wrap',
-       justifyContent: 'space-between',
+        display: 'grid',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
 
     },
+    testText: {
+        fontSize: 18,
+        fontWeight: '400'
+    },
+    
+    testText2: {
+        fontSize: 18,
+        fontWeight: '400',
+        marginTop: 40,
+       color: '#858597'
+    },
 
-   
+    answer: {
+        marginTop: 100,
+        backgroundColor: '#3D5CFF',
+        width: 200,
+        alignItems: 'center',
+        paddingBottom: 12,
+        paddingTop: 14,
+        borderRadius: 12,
+    },
+
+    show: {
+        color: '#fff'
+    },
+
+    mt: {
+        marginTop: 25,
+    },
+
+    back: {
+        width: '100%',
+        alignItems: "center",
+        backgroundColor: '#F4F3FD',
+        paddingTop: 10,
+        paddingBottom: 10,
+        borderRadius: 12,
+    }
+
 
 })
 

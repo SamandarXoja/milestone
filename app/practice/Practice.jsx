@@ -10,6 +10,13 @@ import Logo from "../../assets/icons/Logo.svg";
 function Practice() {
   const router = useRouter();
   const [isHome, setIsHome] = useState(false);
+
+  const [question, SetQuestion] = useState(true);
+  const [showAnswer, setShowAnswer] = useState(false);
+  const [showCategories, setShowCategories] = useState(false);
+
+  const [isBtn, setIsBtn] = useState(true);
+
   let numbers = [
     "1",
     "2",
@@ -39,6 +46,23 @@ function Practice() {
     }
   }
 
+  const handleAnswer = function () {
+    // console.log('hello');
+    SetQuestion(false);
+  };
+
+  function handleButtonShow() {
+    // setIsBtn(true);
+    setShowAnswer(true);
+    setIsBtn(false);
+    setShowCategories(true);
+  }
+
+  function handleQuestion() {
+    setShowCategories(false);
+    setIsBtn(true);
+  }
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <Stack.Screen
@@ -56,11 +80,11 @@ function Practice() {
             </TouchableOpacity>
           ),
           headerRight: () => (
-            <TouchableOpacity 
-            disabled={isHome} 
-            onPress={handleBack} 
-            style={{ width: 150, height: 46 }}>
-             
+            <TouchableOpacity
+              disabled={isHome}
+              // onPress={handleBack}
+              style={{ width: 150, height: 46 }}
+            >
               <Logo width="100%" height="100%" />
             </TouchableOpacity>
           ),
@@ -69,18 +93,70 @@ function Practice() {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.content}>
-          <Text style={styles.title}>
-            Какой “Objective” вы хотите попрактиковать,{" "}
-          </Text>
-          <View style={styles.block}>
-            {numbers.map((item, index) => {
-              return (
-                <TouchableOpacity style={styles.btn} key={index}>
-                  <Text style={styles.texts}>{item}</Text>
+          {question ? (
+            <>
+              <Text style={styles.title}>
+                Какой “Objective” вы хотите попрактиковать,{" "}
+              </Text>
+              <View style={styles.block}>
+                {numbers.map((item, index) => {
+                  return (
+                    <TouchableOpacity
+                      style={styles.btn}
+                      key={index}
+                      onPress={handleAnswer}
+                    >
+                      <Text style={styles.texts}>{item}</Text>
+                    </TouchableOpacity>
+                  );
+                })}
+              </View>
+            </>
+          ) : (
+            <>
+              <Text style={styles.testText}>
+                Русские всегда склонны преодолевать любые трудности.
+              </Text>
+
+              {showAnswer && (
+                <Text style={styles.testText2}>
+                  Russians always tend to overcome any challenges.
+                </Text>
+              )}
+
+              {isBtn && (
+                <TouchableOpacity
+                  style={styles.answer}
+                  disabled={false}
+                  onPress={handleButtonShow}
+                >
+                  <Text style={styles.show}>Просмотреть ответ</Text>
                 </TouchableOpacity>
-              );
-            })}
-          </View>
+              )}
+
+              {showCategories && (
+                <View style={[styles.block, styles.mt]}>
+                  {numbers.map((item, index) => {
+                    return (
+                      <TouchableOpacity
+                        style={styles.btn}
+                        key={index}
+                        onPress={handleQuestion}
+                      >
+                        <Text style={styles.texts}>{item}</Text>
+                      </TouchableOpacity>
+                    );
+                  })}
+                  <TouchableOpacity
+                    style={styles.back}
+                    onPress={() => router.back()}
+                  >
+                    <Text>Назад</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

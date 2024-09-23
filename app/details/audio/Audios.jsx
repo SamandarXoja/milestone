@@ -57,7 +57,7 @@ function Audios() {
           headerRight: () => (
             <TouchableOpacity
               disabled={isHome}
-              onPress={handleBack}
+              // onPress={handleBack}
               style={{ width: 150, height: 46 }}
             >
               <Logo width="100%" height="100%" />

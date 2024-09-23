@@ -8,6 +8,15 @@
       "expo-router"
     ],
     "name": "milestone",
-    "slug": "milestone"
+    "slug": "milestone",
+    "icon": "./assets/icons/logosk.png",
+    "extra": {
+      "eas": {
+        "projectId": "bd8d6942-c72e-46e6-a2e3-b3c0f6c3dedb"
+      }
+    },
+    "android": {
+      "package": "com.samandar_1.milestone"
+    }
   }
 }
