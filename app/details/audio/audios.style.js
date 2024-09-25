@@ -24,13 +24,13 @@ const styles = StyleSheet.create({
     },
     btn: {
         backgroundColor: '#F4F3FD',
-        alignSelf: 'flex-start',
+        // alignSelf: 'flex-start',
         paddingTop: 10,
         paddingLeft: 12,
         paddingRight: 12,
         paddingBottom: 2,
-        borderRadius: 12
-
+        borderRadius: 12,
+        width: '45%'
     },
   
     sub: {
@@ -45,8 +45,13 @@ const styles = StyleSheet.create({
        flexWrap: 'wrap',
       
        
+    },
+    levelIcon: {
+        width: "100%",
+        height: 120,
+        resizeMode: 'cover'
     }
-
+  
 
 
 })

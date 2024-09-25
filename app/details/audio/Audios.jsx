@@ -5,11 +5,39 @@ import { View, Text, SafeAreaView } from "react-native";
 import backIcon from "../../../assets/icons/left.png";
 import styles from "./audios.style";
 import Logo from "../../../assets/icons/Logo.svg";
+import toddler from "../../../assets/icons/Toddler.jpg";
+import { icons } from "../../../constants";
 
 function Audios() {
   const router = useRouter();
 
-  let level = ["Toddler", "Child", "Preteen", "Teenager", "Youngster", "Adult"];
+  // let level = ["Toddler", "Child", "Preteen", "Teenager", "Youngster", "Adult"];
+  let levels = [
+    {
+      level: "Toddler",
+      icon: icons.toddler,
+    },
+    {
+      level: "Child",
+      icon: icons.child,
+    },
+    {
+      level: "Preteen",
+      icon: icons.Preteen,
+    },
+    {
+      level: "Teenager",
+      icon: icons.Teenger,
+    },
+    {
+      level: "Youngster",
+      icon: icons.Youngster,
+    },
+    {
+      level: "Adult",
+      icon: icons.Adult,
+    },
+  ];
 
   const [isButtonPressed, setIsButtonPressed] = useState(false);
   const [isHome, setIsHome] = useState(false);
@@ -70,7 +98,7 @@ function Audios() {
           <Text style={styles.title}>Выберите свой уровень</Text>
 
           <View style={styles.block}>
-            {level.map((item, index) => {
+            {levels.map((item, index) => {
               return (
                 <Pressable
                   onPress={handlePress}
@@ -78,7 +106,8 @@ function Audios() {
                   key={index}
                   disabled={isButtonPressed}
                 >
-                  <Text style={styles.sub}>{item}</Text>
+                  <Image style={styles.levelIcon} source={item.icon} />
+                  <Text style={styles.sub}>{item.level}</Text>
                 </Pressable>
               );
             })}

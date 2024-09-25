@@ -1,11 +1,21 @@
 import { Stack, useRouter } from "expo-router";
 import React, { useState } from "react";
-import { Image, Pressable, ScrollView } from "react-native";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Image, Keyboard, Pressable, ScrollView } from "react-native";
+import { Text, TouchableOpacity, View, Button } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import backIcon from "../../assets/icons/left.png";
 import styles from "./practice.style";
 import Logo from "../../assets/icons/Logo.svg";
+import { TextInput } from "react-native";
+import Send from "../../assets/icons/send.svg";
+import { SendHorizontal } from "lucide-react-native";
+
+import {Audio} from 'expo-av';
+import AudioSave from "../../components/audioSave/AudioSave";
+
+
+
+
 
 function Practice() {
   const router = useRouter();
@@ -15,7 +25,20 @@ function Practice() {
   const [showAnswer, setShowAnswer] = useState(false);
   const [showCategories, setShowCategories] = useState(false);
 
+  const [inputTextShow, setInputTextShow] = useState(false);
   const [isBtn, setIsBtn] = useState(true);
+
+  const [answerText, setAnswerText] = useState([]);
+  const [inputText, setInputText] = useState(null);
+
+  const [voiceShow, setVoiceShow] = useState(false);
+  
+
+
+
+
+
+
 
   let numbers = [
     "1",
@@ -35,32 +58,35 @@ function Practice() {
     "15",
   ];
 
-  function handleBack() {
-    if (!isHome) {
-      setIsHome(true);
-      router.push("/");
-
-      setTimeout(() => {
-        setIsHome(false);
-      }, 1000);
-    }
-  }
-
   const handleAnswer = function () {
-    // console.log('hello');
     SetQuestion(false);
   };
-
-  function handleButtonShow() {
-    // setIsBtn(true);
-    setShowAnswer(true);
-    setIsBtn(false);
-    setShowCategories(true);
-  }
 
   function handleQuestion() {
     setShowCategories(false);
     setIsBtn(true);
+  }
+
+  const handleVoice = () => {
+    setVoiceShow(true);
+    setIsBtn(false);
+    // setShowCategories(true);
+  };
+
+  const handleInputText = () => {
+    setInputTextShow(true);
+    setIsBtn(false);
+  };
+
+  function addText() {
+    if (inputText <= 0) {
+      return;
+    }
+    setAnswerText([...answerText, inputText]);
+    setInputText("");
+    setInputTextShow(false);
+    setShowAnswer(true);
+    setShowCategories(true);
   }
 
   return (
@@ -91,7 +117,10 @@ function Practice() {
         }}
       ></Stack.Screen>
 
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+      >
         <View style={styles.content}>
           {question ? (
             <>
@@ -106,7 +135,7 @@ function Practice() {
                       key={index}
                       onPress={handleAnswer}
                     >
-                      <Text style={styles.texts}>{item}</Text>
+                      <Text>{item}</Text>
                     </TouchableOpacity>
                   );
                 })}
@@ -118,6 +147,17 @@ function Practice() {
                 Русские всегда склонны преодолевать любые трудности.
               </Text>
 
+              {voiceShow && (
+                <AudioSave />
+              )}
+
+              <View style={styles.ask}>
+                {answerText.map((el, index) => (
+                  <Text key={index} style={styles.askText}>
+                    {el}
+                  </Text>
+                ))}
+              </View>
               {showAnswer && (
                 <Text style={styles.testText2}>
                   Russians always tend to overcome any challenges.
@@ -125,13 +165,34 @@ function Practice() {
               )}
 
               {isBtn && (
-                <TouchableOpacity
-                  style={styles.answer}
-                  disabled={false}
-                  onPress={handleButtonShow}
-                >
-                  <Text style={styles.show}>Просмотреть ответ</Text>
-                </TouchableOpacity>
+                <View style={styles.choice}>
+                  <TouchableOpacity style={styles.vocie} onPress={handleVoice}>
+                    <Text style={styles.send}>Отправить голосовой</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={styles.text}
+                    onPress={handleInputText}
+                  >
+                    <Text style={styles.send}>Отправить текст</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+
+              {inputTextShow && (
+                <>
+                  <View style={styles.select}>
+                    <TextInput
+                      style={styles.input}
+                      placeholder="Напиши свой ответ"
+                      value={inputText}
+                      onChangeText={(text) => setInputText(text)}
+                    />
+                    <TouchableOpacity style={styles.sendBtn} onPress={addText}>
+                      <SendHorizontal color={"#fff"} />
+                    </TouchableOpacity>
+                  </View>
+                </>
               )}
 
               {showCategories && (
@@ -143,7 +204,7 @@ function Practice() {
                         key={index}
                         onPress={handleQuestion}
                       >
-                        <Text style={styles.texts}>{item}</Text>
+                        <Text>{item}</Text>
                       </TouchableOpacity>
                     );
                   })}

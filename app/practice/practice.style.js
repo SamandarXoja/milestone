@@ -54,12 +54,12 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '400'
     },
-    
+
     testText2: {
         fontSize: 18,
         fontWeight: '400',
         marginTop: 40,
-       color: '#858597'
+        color: '#858597'
     },
 
     answer: {
@@ -87,9 +87,83 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10,
         borderRadius: 12,
+    },
+    choice: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 60,
+    },
+
+    vocie: {
+        backgroundColor: "#3D5CFF",
+        paddingBottom: 10,
+        paddingTop: 12,
+        paddingLeft: 7,
+        paddingRight: 7,
+        borderRadius: 12
+    },
+
+    vocies: {
+        marginTop: 40,
+        display: 'flex',
+        alignItems: 'flex-end'
+    },
+
+    text: {
+        backgroundColor: "#3D5CFF",
+        paddingBottom: 10,
+        paddingTop: 12,
+        paddingLeft: 7,
+        paddingRight: 7,
+        borderRadius: 12
+    },
+
+    send: {
+        color: '#fff'
+    },
+
+    input: {
+        borderWidth: 1,
+        padding: 10,
+        borderRadius: 12,
+        borderColor: '#B8B8D2',
+        height: 50,
+        width: '70%'
+    },
+    select: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 70,
+    },
+    sendBtn: {
+        backgroundColor: "#3D5CFF",
+        width: '20%',
+        height: 50,
+        borderRadius: 12,
+        justifyContent: 'center',
+        alignItems: 'center'
+
+    },
+
+    ask: {
+        display: 'flex',
+        alignItems: 'flex-end',
+        marginTop: 40,
+
+
+    },
+    askText: {
+        backgroundColor: '#FF6905',
+        padding: 10,
+        borderRadius: 13,
+        color: '#fff',
+        marginBottom: 20,
     }
 
 
+    // 
 })
 
 
