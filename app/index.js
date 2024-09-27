@@ -9,6 +9,8 @@ import Audiolearn from "../components/home/learnAudio/Audiolearn";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 // import PracticeBlock from "../components/home/practiceBlock/practiceBlock";
 import PracticeBlock from "../components/home/practiceBlock/Practice.jsx";
+import Instruction from "../components/home/Instruction/Instruction.jsx";
+
 
 
 const Home = () => {
@@ -42,7 +44,7 @@ const Home = () => {
                             <Audiolearn title={title1} />
                             <Audiolearn title={title2} />
                             <PracticeBlock />
-
+                            <Instruction />
                         </GestureHandlerRootView>
 
                     </View>

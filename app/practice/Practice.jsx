@@ -15,8 +15,6 @@ import AudioSave from "../../components/audioSave/AudioSave";
 
 
 
-
-
 function Practice() {
   const router = useRouter();
   const [isHome, setIsHome] = useState(false);
