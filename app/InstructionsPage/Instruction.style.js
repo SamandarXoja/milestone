@@ -1,3 +1,4 @@
+
 import { StyleSheet } from "react-native";
 
 
@@ -36,10 +37,45 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         paddingBottom: 20,
         borderRadius: 12,
-        alignItems: 'center'
+        alignItems: 'center',
+        
     },
     text: {
         color: '#1F1F39',
+    },
+    box: {
+        marginLeft: 20,
+        marginRight: 10
+    },
+    boxTitle: {
+        marginBottom: 35,
+        fontSize: 20,
+    },
+    bolder: {
+        fontWeight: '500'
+    },
+    boxTwo: {
+        marginTop: 50,
+    },
+    line: {
+        textDecorationLine: 'underline'
+    },
+    backs:{ 
+        marginTop: 40
+    },
+    link: {
+        marginTop: 30,
+    },
+    links: {
+        color: 'red',
+        marginTop: 7,
+        color: '#3D5CFF',
+    },
+    mts: {
+        marginTop: 40
+    },
+    mbs: {
+        marginBottom: 30
     }
 
 })

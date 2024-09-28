@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
     audio: {
         color: '#FF6905',
         fontSize: 10,
-       
     }
 })
 
