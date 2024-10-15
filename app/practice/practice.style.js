@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     },
     content: {
         marginLeft: 20,
+        flex: 1,
         marginRight: 20,
     },
     btn: {

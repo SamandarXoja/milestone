@@ -7,7 +7,7 @@ import child from '../assets/icons/Child.jpg'
 import Preteen from '../assets/icons/Preteen.jpg'
 import Teenger from '../assets/icons/Teenager.jpg';
 import Youngster from '../assets/icons/Youngster.jpg';
-import Adult from '../assets/icons/Adult.png';
+// import Adult from '../assets/icons/Adult.png';
 
 
 export default {
@@ -20,7 +20,7 @@ export default {
     Preteen,
     Teenger,
     Youngster,
-    Adult,
+    // Adult,
  
 
 }

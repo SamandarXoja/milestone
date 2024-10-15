@@ -28,7 +28,7 @@ function Instruction() {
     >
       <Foto />
       <View>
-        <Text style={styles.title}>Предложения для Практики</Text>
+        <Text style={styles.title}>Инструкция</Text>
         <View style={styles.info}>
           <Text style={styles.audio}>4</Text>
         </View>

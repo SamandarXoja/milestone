@@ -9,7 +9,7 @@
     ],
     "name": "milestone",
     "slug": "milestone",
-    "icon": "./assets/icons/logosk.png",
+    "icon": "./assets/icons/milestonelogo.png",
     "extra": {
       "eas": {
         "projectId": "bd8d6942-c72e-46e6-a2e3-b3c0f6c3dedb"

@@ -35,7 +35,7 @@ function Audios() {
     },
     {
       level: "Adult",
-      icon: icons.Adult,
+      icon: null,
     },
   ];
 

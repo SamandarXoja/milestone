@@ -1,5 +1,5 @@
 import { Stack, useRouter } from "expo-router";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Image, Keyboard, Pressable, ScrollView } from "react-native";
 import { Text, TouchableOpacity, View, Button } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -10,33 +10,49 @@ import { TextInput } from "react-native";
 import Send from "../../assets/icons/send.svg";
 import { SendHorizontal } from "lucide-react-native";
 
-import {Audio} from 'expo-av';
+import { Audio } from "expo-av";
 import AudioSave from "../../components/audioSave/AudioSave";
-
-
 
 function Practice() {
   const router = useRouter();
   const [isHome, setIsHome] = useState(false);
-
   const [question, SetQuestion] = useState(true);
   const [showAnswer, setShowAnswer] = useState(false);
   const [showCategories, setShowCategories] = useState(false);
 
   const [inputTextShow, setInputTextShow] = useState(false);
-  const [isBtn, setIsBtn] = useState(true);
+  const [isBtn, setIsBtn] = useState(false);
 
   const [answerText, setAnswerText] = useState([]);
   const [inputText, setInputText] = useState(null);
 
   const [voiceShow, setVoiceShow] = useState(false);
-  
 
+  const [data, setData] = useState(null);
+  const [choosedLevel, setChoosedLevel] = useState(0);
+  const [micShow, setMicShow] = useState(false);
 
+  const [audioTextAnswer, setAudioTextAnswer] = useState(false);
 
+  useEffect(() => {
+    fetch(
+      `https://milestoneserver.onrender.com/practice?category=${choosedLevel}&limit=1`
+    )
+      .then((res) => res.json())
+      .then((json) => setData(json));
+    // setIsBtn(true)
+  }, [choosedLevel]);
 
+  // console.log(choosedLevel);
+  // console.log(data);
 
-
+  // useEffect(() => {
+  //   if (data) {
+  //     setTimeout(() => {
+  //       setIsBtn(true);
+  //     }, 1000);
+  //   }
+  // }, [data]);
 
   let numbers = [
     "1",
@@ -56,18 +72,45 @@ function Practice() {
     "15",
   ];
 
-  const handleAnswer = function () {
+  const handleAnswer = function (item) {
+    setIsBtn(true);
     SetQuestion(false);
+    setChoosedLevel(item);
   };
 
-  function handleQuestion() {
-    setShowCategories(false);
-    setIsBtn(true);
+  function handleQuestion(item) {
+    const newLevel = item;
+
+    setMicShow(false);
+
+    if (newLevel !== choosedLevel) {
+      setChoosedLevel(item);
+      setShowCategories(false);
+      setIsBtn(true);
+      setShowAnswer(false);
+    } else {
+      setIsBtn(true);
+      setMicShow(true);
+      setShowCategories(false);
+      setShowAnswer(false);
+      fetch(
+        `https://milestoneserver.onrender.com/practice?category=${newLevel}&limit=1`
+      )
+        .then((res) => res.json())
+        .then((json) => setData(json));
+    }
+
+    let updateMassive = [...answerText];
+
+    updateMassive.shift();
+    setAnswerText(updateMassive);
   }
 
   const handleVoice = () => {
     setVoiceShow(true);
     setIsBtn(false);
+    setMicShow(true);
+    setShowAnswer(false);
     // setShowCategories(true);
   };
 
@@ -88,12 +131,13 @@ function Practice() {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff", height: '100%'}}>
       <Stack.Screen
         options={{
           headerTitle: "",
           headerShadowVisible: false,
           headerBackVisible: false,
+          height: "100%",
           headerLeft: () => (
             <TouchableOpacity onPress={() => router.back()}>
               <Image
@@ -118,8 +162,10 @@ function Practice() {
       <ScrollView
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
+        style={{height: '100%', flex: 1}}
+        // contentContainerStyle={{flex: 1}}
       >
-        <View style={styles.content}>
+        <View style={styles.content} >
           {question ? (
             <>
               <Text style={styles.title}>
@@ -131,7 +177,7 @@ function Practice() {
                     <TouchableOpacity
                       style={styles.btn}
                       key={index}
-                      onPress={handleAnswer}
+                      onPress={() => handleAnswer(item)}
                     >
                       <Text>{item}</Text>
                     </TouchableOpacity>
@@ -140,13 +186,26 @@ function Practice() {
               </View>
             </>
           ) : (
-            <>
-              <Text style={styles.testText}>
-                Русские всегда склонны преодолевать любые трудности.
-              </Text>
+            <View style={{flex: 1, }}>
+              {data?.map((item) => {
+                return (
+                  <Text style={styles.testText} key={item._id}>
+                    {item?.rus}
+                  </Text>
+                );
+              })}
 
               {voiceShow && (
-                <AudioSave />
+                <AudioSave
+                  data={data}
+                  numbers={numbers}
+                  handleQuestion={handleQuestion}
+                  micShow={micShow}
+                  setMicShow={setMicShow}
+                  audioTextAnswer={audioTextAnswer}
+                  setAudioTextAnswer={setAudioTextAnswer}
+                  setShowCategoriess={setShowCategories}
+                />
               )}
 
               <View style={styles.ask}>
@@ -157,9 +216,15 @@ function Practice() {
                 ))}
               </View>
               {showAnswer && (
-                <Text style={styles.testText2}>
-                  Russians always tend to overcome any challenges.
-                </Text>
+                <>
+                  {data?.map((item) => {
+                    return (
+                      <Text style={styles.testText2} key={item._id}>
+                        {item.eng}
+                      </Text>
+                    );
+                  })}
+                </>
               )}
 
               {isBtn && (
@@ -200,7 +265,7 @@ function Practice() {
                       <TouchableOpacity
                         style={styles.btn}
                         key={index}
-                        onPress={handleQuestion}
+                        onPress={() => handleQuestion(item)}
                       >
                         <Text>{item}</Text>
                       </TouchableOpacity>
@@ -214,7 +279,9 @@ function Practice() {
                   </TouchableOpacity>
                 </View>
               )}
-            </>
+               
+
+            </View>
           )}
         </View>
       </ScrollView>

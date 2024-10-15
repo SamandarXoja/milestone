@@ -23,6 +23,7 @@
     "react-dom": "18.2.0",
     "react-native": "0.74.5",
     "react-native-audio-recorder-player": "^3.6.11",
+    "react-native-axios": "^0.17.1",
     "react-native-dotenv": "^3.4.11",
     "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "~2.16.1",

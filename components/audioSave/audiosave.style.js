@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end'
     },
     row: {
-        marginTop: 30, 
+        marginTop: 30,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -49,11 +49,12 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         paddingBottom: 10,
         color: '#fff',
-        
+
     },
     right: {
         display: 'flex',
-        alignItems: 'flex-end'
+        alignItems: 'flex-end',
+        marginTop: 30,
     },
     play: {
         backgroundColor: '#3D5CFF',
@@ -63,9 +64,47 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
-    }
+    },
 
+    showText: {
+        fontSize: 18,
+        fontWeight: '400',
+        marginTop: 40,
+        color: '#858597'
+    },
+    block: {
+        display: 'grid',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
 
+    },
+    mt: {
+        marginTop: 25,
+    },
+    btn: {
+        backgroundColor: '#F4F3FD',
+        // alignSelf: 'flex-start',
+        paddingTop: 10,
+        paddingLeft: 12,
+        paddingRight: 12,
+        paddingBottom: 10,
+        borderRadius: 12,
+        width: "30%",
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 10,
+
+    },
+    back: {
+        width: '100%',
+        alignItems: "center",
+        backgroundColor: '#F4F3FD',
+        paddingTop: 10,
+        paddingBottom: 10,
+        borderRadius: 12,
+    },
 })
 
 
